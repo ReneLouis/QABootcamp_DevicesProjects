@@ -7,7 +7,7 @@ public class Main {
         Device renePhone = new Device("René's phone");
 
         rebeccaPhone.setBatteryLife(264.6f);
-        rebeccaPhone.setBatteryContent(100);
+        rebeccaPhone.setBatteryContent(80);
 
         System.out.println("Rebecca's device has " + rebeccaPhone.getBatteryContent() + "% of battery.");
 
@@ -20,5 +20,21 @@ public class Main {
         rebeccaPhone.pressPowerButton();
         rebeccaPhone.pressPowerButton();
 
+        rebeccaPhone.charge();
+        renePhone.charge(120);
+
+        Device[] devices = {reneLaptop,rebeccaLaptop, rebeccaPhone,renePhone};
+        for (Device d: devices) {
+            System.out.println(d.getDeviceName() + " has " + d.getBatteryContent() + "% charge left");
+        }
+
+        Device[] deviceArray = new Device[2];
+        deviceArray[0] = renePhone;
+        deviceArray[1] = rebeccaPhone;
+        for(int i = 0 ; i < deviceArray.length ; i++) {
+            System.out.println(deviceArray[i]);
+            System.out.println(i);
+            System.out.println(deviceArray[i].toString());
+        }
     }
 }

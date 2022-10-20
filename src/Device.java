@@ -1,6 +1,6 @@
 public class Device {
 
-    public Device (double deviceDepth, double deviceHeight, double deviceWidth, boolean isTouchScreen, String deviceName) {
+    public Device(double deviceDepth, double deviceHeight, double deviceWidth, boolean isTouchScreen, String deviceName) {
         this.deviceDepth = (float) deviceDepth;
         this.deviceHeight = (float) deviceHeight;
         this.deviceWidth = (float) deviceWidth;
@@ -9,9 +9,11 @@ public class Device {
     }
 
     public Device(String deviceName) {
-        deviceDepth = deviceHeight = deviceWidth = 0;
-        isTouchScreen = true;
-        this.deviceName = deviceName;
+        this(0, 0, 0, deviceName);
+    }
+
+    public Device(double deviceDepth, double deviceHeight, double deviceWidth, String deviceName) {
+        this(deviceDepth, deviceHeight, deviceWidth, false, deviceName);
     }
 
     private float batteryLife;      // Total battery life.
@@ -22,6 +24,7 @@ public class Device {
     private float deviceDepth;
     private boolean isTurnedOn;
     private String deviceName;
+    private int passCode;
 
     public float getBatteryLife() {
         return batteryLife;
@@ -47,6 +50,10 @@ public class Device {
         return deviceDepth;
     }
 
+    public String getDeviceName() {
+        return deviceName;
+    }
+
     public void setBatteryLife(float batteryLife) {
         this.batteryLife = batteryLife;
     }
@@ -59,9 +66,24 @@ public class Device {
         isTurnedOn = !isTurnedOn;
         if (isTurnedOn) {
             System.out.println(deviceName + " is booting up!");
-        }   else {
+        } else {
             System.out.println(deviceName + " is shutting down.");
         }
+    }
 
+
+    public void charge() {
+        charge(10);
+    }
+
+    public void charge(int speed) {
+        if (batteryContent < 100) {
+            batteryContent += Math.min(100 - batteryContent, speed);
+        }
+        System.out.println(deviceName + " has " + batteryContent + "% charge");
+    }
+
+    public String toString() {
+        return deviceName + " is a device of width " + deviceWidth;
     }
 }
